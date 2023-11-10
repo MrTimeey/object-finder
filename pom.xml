@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.mrtimeey</groupId>
 	<artifactId>object-finder</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>object-finder</name>
 	<description>Library for finding objects in complex data structures</description>
 	<url>https://github.com/MrTimeey/object-finder</url>
