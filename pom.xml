@@ -23,7 +23,7 @@
 		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
 		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
 	</properties>
 
 	<licenses>
@@ -44,6 +44,17 @@
 		<developerConnection>scm:git:ssh://github.com:MrTimeey/object-finder.git</developerConnection>
 		<url>https://github.com/MrTimeey/object-finder/tree/main</url>
 	</scm>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>
@@ -76,16 +87,19 @@
 			<artifactId>jackson-databind</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		<!-- Make jackson comfortable with Optionals -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jdk8</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		<!-- Required for LocalDate deserialzing -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-gpg-plugin</artifactId>
+			<version>${maven-gpg-plugin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -158,7 +172,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
-						<version>${maven-gpg-plugin.version}</version>
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>
