@@ -18,7 +18,29 @@
 		<junit.version>5.9.3</junit.version>
 		<assertj.version>3.24.2</assertj.version>
 		<commons-io.version>2.13.0</commons-io.version>
+		<!-- Plugins -->
+		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 	</properties>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://github.com/MrTimeey/object-finder/blob/main/LICENSE</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<id>MrTimeey</id>
+			<name>Tim Kruse</name>
+			<email>coding@tim-kruse.com</email>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:git:git@github.com:MrTimeey/object-finder.git</connection>
+		<developerConnection>scm:git:ssh://github.com:MrTimeey/object-finder.git</developerConnection>
+		<url>https://github.com/MrTimeey/object-finder/tree/main</url>
+	</scm>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -84,6 +106,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<source>17</source>
 					<target>17</target>
