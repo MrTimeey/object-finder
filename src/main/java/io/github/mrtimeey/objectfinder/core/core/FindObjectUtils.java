@@ -71,7 +71,8 @@ public final class FindObjectUtils {
       Deque<JsonNode> stack = new ArrayDeque<>();
       List<T> result = new LinkedList<>();
       JsonNode baseRoot = JsNodeUtils.toJsNode(base, om).orElseThrow();
-      String jsonPointer = convertToPath(searchedPathValue.first());
+      String jsonPointer = PathConversionUtils.convert(searchedPathValue.first());
+      if (jsonPointer.isEmpty()) return result;
       JsonNode searchedNode = JsNodeUtils.toJsNode(searchedPathValue.second(), om).orElseThrow();
       stack.push(baseRoot);
       while (!stack.isEmpty()) {
@@ -98,23 +99,6 @@ public final class FindObjectUtils {
          return Optional.of(elem);
       }
       return Optional.empty();
-   }
-
-   private static String convertToPath(String providedPath) {
-      if (providedPath.contains("/") && !providedPath.contains(".")) {
-         if (!providedPath.startsWith("/")) {
-            return String.format("/%s", providedPath);
-         }
-         return providedPath;
-      }
-      if (providedPath.contains(".")) {
-         String convertedPath = providedPath.replace(".", "/");
-         if (!convertedPath.startsWith("/")) {
-            return String.format("/%s", convertedPath);
-         }
-         return convertedPath;
-      }
-      return String.format("/%s", providedPath);
    }
 
    private static List<JsonNode> toList(Iterator<JsonNode> it) {
