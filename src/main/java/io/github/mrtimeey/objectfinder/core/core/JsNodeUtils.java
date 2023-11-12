@@ -2,7 +2,7 @@ package io.github.mrtimeey.objectfinder.core.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.mrtimeey.objectfinder.core.type.Try;
+import io.github.sfrick.jcontrols.Try;
 
 import java.util.Optional;
 

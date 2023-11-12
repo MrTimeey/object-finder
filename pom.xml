@@ -10,7 +10,7 @@
 	<url>https://github.com/MrTimeey/object-finder</url>
 	<properties>
 		<!-- Project Properties -->
-		<revision>0.2.0-SNAPSHOT</revision>
+		<revision>0.0.42-SNAPSHOT</revision>
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
@@ -81,6 +81,11 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+		<dependency>
+			<groupId>io.github.s-frick</groupId>
+			<artifactId>controls</artifactId>
+			<version>0.1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
