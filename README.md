@@ -1,6 +1,7 @@
 # object-finder [![CI](https://github.com/MrTimeey/object-finder/actions/workflows/mvn-build.yml/badge.svg?branch=main)](https://github.com/MrTimeey/object-finder/actions/workflows/mvn-build.yml?query=branch%3Amain) [![Maven Central](https://img.shields.io/maven-central/v/io.github.mrtimeey/object-finder.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.mrtimeey%22%20AND%20a:%22object-finder%22) [![Javadocs](http://www.javadoc.io/badge/io.github.mrtimeey/object-finder.svg)](http://www.javadoc.io/doc/io.github.mrtimeey/object-finder)
 The object-finder provides utility functions to identify specific objects in complex data structures.
 * [Object-Finder's goals](#goals)
+* [TL;DR](#tldr)
 * [Example UseCase](#example)
 * [Quickstart](#quickstart)
 
@@ -12,6 +13,29 @@ Finding various objects in a complex object often leads to multiple same looking
 
 The Object-Finder wants to simply your code. 
 
+## <a name="tldr"/>TL;DR</a>
+
+*You have an object with a nested structure, and you are looking for:*
+
+type `CoverageBundle.class` with a field `id` which contains `fancyId`:
+```java 
+ Pair location = Pair.of("id", "fancyId");
+ Optional<CoverageBundle> result = FindObjectUtils.find(baseObject, location, CoverageBundle.class);
+```
+
+type `CoverageBundle.class` with some other value which is nested even more:
+ ```java 
+ Pair location = Pair.of("metadata/reference/key", "nestedKey");
+ Optional<CoverageBundle> result = FindObjectUtils.find(baseObject, location, CoverageBundle.class);
+ ```
+
+all type `CoverageBundle.class` instances with a value which is nested even more:
+ ```java 
+ Pair location = Pair.of("metadata/reference/key", "nestedKey");
+ List<CoverageBundle> result = FindObjectUtils.findAll(baseObject, location, CoverageBundle.class);
+ ```
+
+For longer example scroll to [Example UseCase](#example).
 
 ## <a name="example"/>Example UseCase</a>
 Given is a complex data structure:
