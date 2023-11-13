@@ -16,10 +16,10 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Third Party Dependencies -->
-		<jackson.version>2.15.2</jackson.version>
-		<junit.version>5.9.3</junit.version>
+		<jackson.version>2.15.3</jackson.version>
+		<junit.version>5.10.1</junit.version>
 		<assertj.version>3.24.2</assertj.version>
-		<jcontrols.version>0.1.0</jcontrols.version>
+		<jcontrols.version>0.3.0</jcontrols.version>
 		<!-- Plugins -->
 		<nexus-staging-plugin.version>1.6.13</nexus-staging-plugin.version>
 		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
