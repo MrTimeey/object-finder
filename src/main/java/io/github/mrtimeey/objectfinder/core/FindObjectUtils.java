@@ -1,8 +1,8 @@
-package io.github.mrtimeey.objectfinder.core.core;
+package io.github.mrtimeey.objectfinder.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.mrtimeey.objectfinder.core.type.Pair;
+import io.github.mrtimeey.objectfinder.type.Pair;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -14,10 +14,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Utility class to find specific objects in complex data structures.
+ */
 public final class FindObjectUtils {
 
    private FindObjectUtils() {
-      // Hide default constructor
+      throw new IllegalStateException("Do not instantiate this class");
    }
 
    private static final ObjectMapper om = ObjectMapperFactory.objectMapper();

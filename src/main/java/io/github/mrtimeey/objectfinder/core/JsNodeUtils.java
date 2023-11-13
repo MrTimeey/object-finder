@@ -1,4 +1,4 @@
-package io.github.mrtimeey.objectfinder.core.core;
+package io.github.mrtimeey.objectfinder.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,13 +6,13 @@ import io.github.sfrick.jcontrols.Try;
 
 import java.util.Optional;
 
-public final class JsNodeUtils {
+final class JsNodeUtils {
 
   private JsNodeUtils() {
-     // Hide default constructor
+     throw new IllegalStateException("Do not instantiate this class");
   }
 
-  public static Optional<JsonNode> toJsNode(Object root, ObjectMapper om) {
+  static Optional<JsonNode> toJsNode(Object root, ObjectMapper om) {
     if (root instanceof JsonNode n) {
       return Optional.of(n);
     }
@@ -31,7 +31,7 @@ public final class JsNodeUtils {
                         }));
   }
 
-  public static <T> Optional<T> toClass(JsonNode root, Class<T> type, ObjectMapper om) {
+  static <T> Optional<T> toClass(JsonNode root, Class<T> type, ObjectMapper om) {
     return Try.of(() -> om.convertValue(root, type)).toOptional();
   }
 }

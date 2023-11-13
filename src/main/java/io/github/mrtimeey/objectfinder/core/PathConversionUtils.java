@@ -1,6 +1,10 @@
-package io.github.mrtimeey.objectfinder.core.core;
+package io.github.mrtimeey.objectfinder.core;
 
-public final class PathConversionUtils {
+final class PathConversionUtils {
+
+   private PathConversionUtils() {
+      throw new IllegalStateException("Do not instantiate this class");
+   }
 
    static String convert(String providedPath) {
       if (providedPath == null || providedPath.isEmpty()) {

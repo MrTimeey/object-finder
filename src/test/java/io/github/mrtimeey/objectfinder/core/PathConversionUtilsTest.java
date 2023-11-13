@@ -1,5 +1,7 @@
-package io.github.mrtimeey.objectfinder.core.core;
+package io.github.mrtimeey.objectfinder.core;
 
+import io.github.mrtimeey.objectfinder.core.PathConversionUtils;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -10,7 +12,7 @@ class PathConversionUtilsTest {
    @ParameterizedTest(name = "Convert method for value {0} should return {1}")
    @MethodSource("pathData")
    void testValidData(String input, String expectedOutput) {
-      assertThat(PathConversionUtils.convert(input)).isEqualTo(expectedOutput);
+      Assertions.assertThat(PathConversionUtils.convert(input)).isEqualTo(expectedOutput);
    }
 
    private static Object[][] pathData() {

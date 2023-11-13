@@ -2,8 +2,8 @@ package io.github.mrtimeey.objectfinder.common.model;
 
 import java.util.List;
 
-public record Offer(Identifier id, Identifier offerNumber, Bundle bundle, List<Property> properties) {
-   public static Offer of(Identifier id, Identifier offerNumber, Bundle bundle, List<Property> properties) {
-      return new Offer(id, offerNumber, bundle, properties);
+public record Offer(String id, ProductBundle productBundle) {
+   public static Offer of(String id, ProductBundle productBundle) {
+      return new Offer(id, productBundle);
    }
 }
