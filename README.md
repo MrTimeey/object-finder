@@ -35,7 +35,7 @@ all type `CoverageBundle.class` instances with a value which is nested even more
  List<CoverageBundle> result = FindObjectUtils.findAll(baseObject, location, CoverageBundle.class);
  ```
 
-For longer example scroll to [Example UseCase](#example).
+Detailed example at [Example UseCase](#example).
 
 ## <a name="example"/>Example UseCase</a>
 Given is a complex data structure:
@@ -87,7 +87,7 @@ private Optional<CalculationPart> findCalculationPart(Offer offer) {
 You have to go through the whole object structure to find the specific object. 
 If you want to find other nodes or identify the object with another predicate you have to build a new method.
 
-The object-helper library can help simplifying your code:
+The object-finder library can help simplifying your code:
 ```java
 private Optional<CalculationPart> findCalculationPart(Offer offer) {
        Pair<String, String> location = Pair.of("id", "02f26e1b-e548-440d-8bfc-559d7c9fb1bd");
