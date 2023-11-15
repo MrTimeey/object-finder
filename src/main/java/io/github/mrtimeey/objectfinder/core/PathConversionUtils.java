@@ -1,6 +1,7 @@
 package io.github.mrtimeey.objectfinder.core;
 
-import io.github.mrtimeey.objectfinder.type.Path;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 final class PathConversionUtils {
 
@@ -9,6 +10,13 @@ final class PathConversionUtils {
    }
 
    static Path convert(String providedPath) {
+      Pattern pattern = Pattern.compile("(.*)\\[(.*)\\]");
+      if (providedPath != null) {
+         Matcher matcher = pattern.matcher(providedPath);
+         if (matcher.matches()) {
+            return Path.of(convertString(matcher.group(1)), true);
+         }
+      }
       String stringPath = convertString(providedPath);
       return Path.of(stringPath);
    }
@@ -33,7 +41,14 @@ final class PathConversionUtils {
       return String.format("/%s", providedPath);
    }
 
-   record Path(String path) {
+   record Path(String path, boolean isArray) {
+      Path(String path) {
+         this(path, false);
+      }
+
+      static Path of(String path, boolean isArray){
+         return new Path(path, isArray);
+      }
       static Path of(String path){
          return new Path(path);
       }

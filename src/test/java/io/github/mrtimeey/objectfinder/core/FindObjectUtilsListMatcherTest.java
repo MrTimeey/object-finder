@@ -24,7 +24,6 @@ class FindObjectUtilsListMatcherTest {
    }
 
    @Test
-   @Disabled
    void testFind_matchingStringInList() {
       Optional<CalculationPart> result = FindObjectUtils.find(offer, Pair.of("names[]", "specialDiscount"), CalculationPart.class);
 

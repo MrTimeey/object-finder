@@ -97,9 +97,17 @@ public final class FindObjectUtils {
 
    private static <T> Optional<T> getMatchingObject(Class<T> toClazz, JsonNode temp, PathConversionUtils.Path jsonPointer, JsonNode searchedNode) {
       JsonNode valueNode = temp.at(jsonPointer.path());
-      if (!valueNode.isMissingNode() && !valueNode.isNull() && searchedNode.equals(valueNode)) {
-         T elem = JsNodeUtils.toClass(temp, toClazz, om).orElseThrow();
-         return Optional.of(elem);
+      if (!valueNode.isMissingNode() && !valueNode.isNull()) {
+         if (!valueNode.isArray() && searchedNode.equals(valueNode)) {
+            T elem = JsNodeUtils.toClass(temp, toClazz, om).orElseThrow();
+            return Optional.of(elem);
+         } else if (valueNode.isArray()) {
+            if (toList(valueNode.elements()).contains(searchedNode)) {
+               T elem = JsNodeUtils.toClass(temp, toClazz, om).orElseThrow();
+               return Optional.of(elem);
+            }
+         }
+
       }
       return Optional.empty();
    }
