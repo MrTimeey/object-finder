@@ -24,7 +24,7 @@ class FindObjectUtilsTest {
    }
 
    @Test
-   void testFind_withLeafNode() {
+   void testFind() {
       Optional<CalculationPart> result = FindObjectUtils.find(offer, Pair.of("id", "02f26e1b-e548-440d-8bfc-559d7c9fb1bd"), CalculationPart.class);
 
       assertThat(result).isPresent();
@@ -42,7 +42,7 @@ class FindObjectUtilsTest {
    }
 
    @Test
-   void testFind_withNestedPathAndObject() {
+   void testFind_withObject() {
       Optional<CalculationPart> result = FindObjectUtils.find(offer, Pair.of("/information", Information.of("SPECIAL_DISCOUNT")), CalculationPart.class);
 
       assertThat(result).isPresent();

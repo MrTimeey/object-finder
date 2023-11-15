@@ -74,7 +74,7 @@ public final class FindObjectUtils {
       Deque<JsonNode> stack = new ArrayDeque<>();
       List<T> result = new LinkedList<>();
       JsonNode baseRoot = JsNodeUtils.toJsNode(base, om).orElseThrow();
-      String jsonPointer = PathConversionUtils.convert(searchedPathValue.first());
+      PathConversionUtils.Path jsonPointer = PathConversionUtils.convert(searchedPathValue.first());
       if (jsonPointer.isEmpty()) return result;
       JsonNode searchedNode = JsNodeUtils.toJsNode(searchedPathValue.second(), om).orElseThrow();
       stack.push(baseRoot);
@@ -95,8 +95,8 @@ public final class FindObjectUtils {
       return result;
    }
 
-   private static <T> Optional<T> getMatchingObject(Class<T> toClazz, JsonNode temp, String jsonPointer, JsonNode searchedNode) {
-      JsonNode valueNode = temp.at(jsonPointer);
+   private static <T> Optional<T> getMatchingObject(Class<T> toClazz, JsonNode temp, PathConversionUtils.Path jsonPointer, JsonNode searchedNode) {
+      JsonNode valueNode = temp.at(jsonPointer.path());
       if (!valueNode.isMissingNode() && !valueNode.isNull() && searchedNode.equals(valueNode)) {
          T elem = JsNodeUtils.toClass(temp, toClazz, om).orElseThrow();
          return Optional.of(elem);
