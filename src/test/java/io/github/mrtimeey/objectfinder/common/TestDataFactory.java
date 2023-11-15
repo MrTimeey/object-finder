@@ -5,6 +5,7 @@ import io.github.mrtimeey.objectfinder.common.model.ProductBundle;
 import io.github.mrtimeey.objectfinder.common.model.CalculationPart;
 import io.github.mrtimeey.objectfinder.common.model.Offer;
 import io.github.mrtimeey.objectfinder.common.model.Product;
+import io.github.mrtimeey.objectfinder.common.model.Property;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,18 +13,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public final class TestDataFactory {
-
-   public void test() {
-      Offer offer = createOffer();
-      Optional<CalculationPart> result = Optional.ofNullable(offer)
-            .map(Offer::productBundle)
-            .map(ProductBundle::products)
-            .orElse(List.of())
-            .stream()
-            .flatMap(product -> product.calculationParts().stream())
-            .filter(calculationPart -> "02f26e1b-e548-440d-8bfc-559d7c9fb1bd".equals(calculationPart.id()))
-            .findFirst();
-   }
 
    public static Offer createOffer() {
       return Offer.of(
@@ -37,17 +26,26 @@ public final class TestDataFactory {
                                     CalculationPart.of(
                                           "02f26e1b-e548-440d-8bfc-559d7c9fb1bd",
                                           Information.of("SPECIAL_DISCOUNT"),
-                                          -5
+                                          -5,
+                                          List.of("specialDiscount", "fancyName"),
+                                          List.of(
+                                                Property.of("d9c40d29-e828-4c15-9519-29891496ec8e"),
+                                                Property.of("ebe1dac6-46f7-4415-a0cd-61bd9b40bb60")
+                                          )
                                     ),
                                     CalculationPart.of(
                                           "9f1f0368-29b8-40d7-a223-dfb672cc2077",
                                           Information.of("PRICE"),
-                                          11
+                                          11,
+                                          List.of("price"),
+                                          List.of(
+                                                Property.of("f40c60af-46aa-450c-8d84-984eea18effc")
+                                          )
                                     )
                               )
                         ),
                         Product.of(
-                              "92d7b2db-7ed5-4cfb-bc06-9622e3078e57\n",
+                              "92d7b2db-7ed5-4cfb-bc06-9622e3078e57",
                               List.of(
                                     CalculationPart.of(
                                           "9598a3af-9935-442c-b5d1-ae280e726b00",
