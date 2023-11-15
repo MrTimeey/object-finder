@@ -35,6 +35,12 @@ all type `CoverageBundle.class` instances with a value which is nested even more
  List<CoverageBundle> result = FindObjectUtils.findAll(baseObject, location, CoverageBundle.class);
  ```
 
+type `CoverageBundle.class` which contains a string `specialDiscount` in a nested list of strings:
+```java 
+ Pair location = Pair.of("names[]", "specialDiscount");
+ Optional<CoverageBundle> result = FindObjectUtils.find(baseObject, location, CoverageBundle.class);
+```
+
 Detailed example at [Example UseCase](#example).
 
 ## <a name="example"/>Example UseCase</a>
