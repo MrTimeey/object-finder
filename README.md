@@ -4,6 +4,7 @@ The object-finder provides utility functions to identify specific objects in com
 * [TL;DR](#tldr)
 * [Longer example](./exampleUseCase.md)
 * [Quickstart](#quickstart)
+* [Developer doc](./developerInformation.md)
 
 ## <a name="goals"/>Object-Finder's goal</a>
 
