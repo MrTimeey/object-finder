@@ -14,7 +14,7 @@ final class PathConversionUtils {
       if (providedPath != null) {
          Matcher matcher = pattern.matcher(providedPath);
          if (matcher.matches()) {
-            return Path.of(convertString(matcher.group(1)), true);
+            return Path.of(convertString(matcher.group(1)), convertString(matcher.group(2)), true);
          }
       }
       String stringPath = convertString(providedPath);
@@ -41,13 +41,13 @@ final class PathConversionUtils {
       return String.format("/%s", providedPath);
    }
 
-   record Path(String path, boolean isArray) {
+   record Path(String path, String nestedPath, boolean isArray) {
       Path(String path) {
-         this(path, false);
+         this(path, "", false);
       }
 
-      static Path of(String path, boolean isArray){
-         return new Path(path, isArray);
+      static Path of(String path, String nestedPath, boolean isArray){
+         return new Path(path, nestedPath, isArray);
       }
       static Path of(String path){
          return new Path(path);

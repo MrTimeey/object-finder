@@ -102,9 +102,26 @@ public final class FindObjectUtils {
             T elem = JsNodeUtils.toClass(temp, toClazz, om).orElseThrow();
             return Optional.of(elem);
          } else if (valueNode.isArray()) {
-            if (toList(valueNode.elements()).contains(searchedNode)) {
+            List<JsonNode> elements = toList(valueNode.elements());
+            if (elements.contains(searchedNode)) {
                T elem = JsNodeUtils.toClass(temp, toClazz, om).orElseThrow();
                return Optional.of(elem);
+            } else if (!jsonPointer.nestedPath().isEmpty()) {
+               Optional<JsonNode> nestedObject = elements.stream()
+                     .filter(e -> {
+                        JsonNode nestedNode = e.at(jsonPointer.nestedPath());
+                        if (!nestedNode.isMissingNode() && !nestedNode.isNull()) {
+                           if (!nestedNode.isArray() && searchedNode.equals(nestedNode)) {
+                              return true;
+                           }
+                        }
+                        return false;
+                     })
+                     .findFirst();
+               if (nestedObject.isPresent()) {
+                  T elem = JsNodeUtils.toClass(temp, toClazz, om).orElseThrow();
+                  return Optional.of(elem);
+               }
             }
          }
 
