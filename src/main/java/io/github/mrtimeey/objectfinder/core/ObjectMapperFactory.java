@@ -1,17 +1,17 @@
-package io.github.mrtimeey.objectfinder.core.core;
+package io.github.mrtimeey.objectfinder.core;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 
-public final class ObjectMapperFactory {
+final class ObjectMapperFactory {
 
    private ObjectMapperFactory() {
-      // Hide default constructor
+      throw new IllegalStateException("Do not instantiate this class");
    }
 
-   public static ObjectMapper objectMapper() {
+   static ObjectMapper objectMapper() {
       ObjectMapper mapper = new ObjectMapper();
       mapper.registerModule(new Jdk8Module());
       mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

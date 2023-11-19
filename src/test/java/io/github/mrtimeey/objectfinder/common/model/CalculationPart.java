@@ -1,10 +1,12 @@
 package io.github.mrtimeey.objectfinder.common.model;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-public record CalculationPart(Identifier id, Metadata metadata, BigDecimal price, List<Property> properties) {
-   public static CalculationPart of(Identifier id, Metadata metadata, BigDecimal price, List<Property> properties) {
-      return new CalculationPart(id, metadata, price, properties);
+public record CalculationPart(String id, Information information, Integer price, List<String> names, List<Property> properties) {
+   public static CalculationPart of(String id, Information information, Integer price, List<String> names, List<Property> properties) {
+      return new CalculationPart(id, information, price, names, properties);
+   }
+   public static CalculationPart of(String id, Information information, Integer price) {
+      return new CalculationPart(id, information, price, List.of(), List.of());
    }
 }

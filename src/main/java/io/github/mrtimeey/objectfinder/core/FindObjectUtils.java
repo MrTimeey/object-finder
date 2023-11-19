@@ -1,8 +1,8 @@
-package io.github.mrtimeey.objectfinder.core.core;
+package io.github.mrtimeey.objectfinder.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.mrtimeey.objectfinder.core.type.Pair;
+import io.github.mrtimeey.objectfinder.type.Pair;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -14,10 +14,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Utility class to find specific objects in complex data structures.
+ */
 public final class FindObjectUtils {
 
    private FindObjectUtils() {
-      // Hide default constructor
+      throw new IllegalStateException("Do not instantiate this class");
    }
 
    private static final ObjectMapper om = ObjectMapperFactory.objectMapper();
@@ -71,7 +74,7 @@ public final class FindObjectUtils {
       Deque<JsonNode> stack = new ArrayDeque<>();
       List<T> result = new LinkedList<>();
       JsonNode baseRoot = JsNodeUtils.toJsNode(base, om).orElseThrow();
-      String jsonPointer = PathConversionUtils.convert(searchedPathValue.first());
+      PathConversionUtils.Path jsonPointer = PathConversionUtils.convert(searchedPathValue.first());
       if (jsonPointer.isEmpty()) return result;
       JsonNode searchedNode = JsNodeUtils.toJsNode(searchedPathValue.second(), om).orElseThrow();
       stack.push(baseRoot);
@@ -92,11 +95,36 @@ public final class FindObjectUtils {
       return result;
    }
 
-   private static <T> Optional<T> getMatchingObject(Class<T> toClazz, JsonNode temp, String jsonPointer, JsonNode searchedNode) {
-      JsonNode valueNode = temp.at(jsonPointer);
-      if (!valueNode.isMissingNode() && !valueNode.isNull() && searchedNode.equals(valueNode)) {
-         T elem = JsNodeUtils.toClass(temp, toClazz, om).orElseThrow();
-         return Optional.of(elem);
+   private static <T> Optional<T> getMatchingObject(Class<T> toClazz, JsonNode temp, PathConversionUtils.Path jsonPointer, JsonNode searchedNode) {
+      JsonNode valueNode = temp.at(jsonPointer.path());
+      if (!valueNode.isMissingNode() && !valueNode.isNull()) {
+         if (!valueNode.isArray() && searchedNode.equals(valueNode)) {
+            T elem = JsNodeUtils.toClass(temp, toClazz, om).orElseThrow();
+            return Optional.of(elem);
+         } else if (valueNode.isArray()) {
+            List<JsonNode> elements = toList(valueNode.elements());
+            if (elements.contains(searchedNode)) {
+               T elem = JsNodeUtils.toClass(temp, toClazz, om).orElseThrow();
+               return Optional.of(elem);
+            } else if (!jsonPointer.nestedPath().isEmpty()) {
+               Optional<JsonNode> nestedObject = elements.stream()
+                     .filter(e -> {
+                        JsonNode nestedNode = e.at(jsonPointer.nestedPath());
+                        if (!nestedNode.isMissingNode() && !nestedNode.isNull()) {
+                           if (!nestedNode.isArray() && searchedNode.equals(nestedNode)) {
+                              return true;
+                           }
+                        }
+                        return false;
+                     })
+                     .findFirst();
+               if (nestedObject.isPresent()) {
+                  T elem = JsNodeUtils.toClass(temp, toClazz, om).orElseThrow();
+                  return Optional.of(elem);
+               }
+            }
+         }
+
       }
       return Optional.empty();
    }
