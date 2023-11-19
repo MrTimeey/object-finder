@@ -17,14 +17,14 @@ The Object-Finder wants to simply your code.
 
 ### Get object by field
 ```java
-      Pair<String, Object> location = Pair.of("id", "fancyId");
+      Pair<String, Object> location = Pair.of("id", "02f26e1b-e548-440d-8bfc-559d7c9fb1bd");
       Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
       assertThat(result).isPresent();
 ```
 
 ### Get object by nested object value
 ```java 
-      Pair<String, Object> location = Pair.of("metadata/reference/key", "nestedKey");
+      Pair<String, Object> location = Pair.of("information/key", "SPECIAL_DISCOUNT");
       Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
       assertThat(result).isPresent();
 ```
@@ -38,7 +38,7 @@ The Object-Finder wants to simply your code.
 
 ### Get object by nested object value in list
  ```java 
-      Pair<String, Object> location = Pair.of("names[id]", "d9c40d29-e828-4c15-9519-29891496ec8e");
+      Pair<String, Object> location = Pair.of("properties[id]", "d9c40d29-e828-4c15-9519-29891496ec8e");
       Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
       assertThat(result).isPresent();
  ```
@@ -46,9 +46,9 @@ The Object-Finder wants to simply your code.
 ### Get all objects by nested object value
 
 ```java
-      Pair<String, Object> location = Pair.of("metadata/reference/key", "nestedKey");
+      Pair<String, Object> location = Pair.of("information/key", "SPECIAL_DISCOUNT");
       List<CalculationPart> result = FindObjectUtils.findAll(baseObject, location, CalculationPart.class);
-      assertThat(result).hasSize(1);
+      assertThat(result).hasSize(2);
 ```
 
 ## <a name="quickstart"/>Quickstart</a>

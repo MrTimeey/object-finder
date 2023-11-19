@@ -13,7 +13,7 @@ import java.util.Optional;
 import static io.github.mrtimeey.objectfinder.common.TestDataFactory.createOffer;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DocExamples {
+public class DocExamplesTest {
 
    private Offer baseObject;
 
@@ -40,14 +40,14 @@ public class DocExamples {
 
    @Test
    void getObjectByField() {
-      Pair<String, Object> location = Pair.of("id", "fancyId");
+      Pair<String, Object> location = Pair.of("id", "02f26e1b-e548-440d-8bfc-559d7c9fb1bd");
       Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
       assertThat(result).isPresent();
    }
 
    @Test
    void getObjectByNestedObjectValue() {
-      Pair<String, Object> location = Pair.of("metadata/reference/key", "nestedKey");
+      Pair<String, Object> location = Pair.of("information/key", "SPECIAL_DISCOUNT");
       Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
       assertThat(result).isPresent();
    }
@@ -61,16 +61,16 @@ public class DocExamples {
 
    @Test
    void getObjectByNestedObjectValueInList() {
-      Pair<String, Object> location = Pair.of("names[id]", "d9c40d29-e828-4c15-9519-29891496ec8e");
+      Pair<String, Object> location = Pair.of("properties[id]", "d9c40d29-e828-4c15-9519-29891496ec8e");
       Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
       assertThat(result).isPresent();
    }
 
    @Test
    void getAllObjectsByNestedObjectValue() {
-      Pair<String, Object> location = Pair.of("metadata/reference/key", "nestedKey");
+      Pair<String, Object> location = Pair.of("information/key", "SPECIAL_DISCOUNT");
       List<CalculationPart> result = FindObjectUtils.findAll(baseObject, location, CalculationPart.class);
-      assertThat(result).hasSize(1);
+      assertThat(result).hasSize(2);
    }
 
 }
