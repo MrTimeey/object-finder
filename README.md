@@ -15,6 +15,12 @@ The Object-Finder wants to simply your code.
 
 ## <a name="tldr"/>TL;DR</a>
 
+*Important:* 
+
+The returned object is a new instance and no reference from provided root object.
+Changing the returned object will not affect the base object. 
+There will be an additional API-endpoint soon.
+
 ### Get object by field
 ```java
       Pair<String, Object> location = Pair.of("id", "02f26e1b-e548-440d-8bfc-559d7c9fb1bd");
