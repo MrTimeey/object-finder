@@ -18,45 +18,47 @@ The Object-Finder wants to simply your code.
 
 *Important:* 
 
-The returned object is a new instance and no reference from provided root object.
-Changing the returned object will not affect the base object. 
-There will be an additional API-endpoint soon.
+> [!IMPORTANT]
+> The returned object is a new instance and no reference from provided root object. Changing the returned object will not affect the base object. There will be an additional API-endpoint soon.
 
 ### Get object by field
 ```java
-      Pair<String, Object> location = Pair.of("id", "02f26e1b-e548-440d-8bfc-559d7c9fb1bd");
-      Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
-      assertThat(result).isPresent();
+Pair<String, Object> location = Pair.of("id", "02f26e1b-e548-440d-8bfc-559d7c9fb1bd");
+Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
+assertThat(result).isPresent();
 ```
 
 ### Get object by nested object value
 ```java 
-      Pair<String, Object> location = Pair.of("information/key", "SPECIAL_DISCOUNT");
-      Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
-      assertThat(result).isPresent();
+Pair<String, Object> location = Pair.of("information/key", "SPECIAL_DISCOUNT");
+Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
+assertThat(result).isPresent();
 ```
 
 ### Get object by string in list
  ```java 
-      Pair<String, Object> location = Pair.of("names[]", "specialDiscount");
-      Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
-      assertThat(result).isPresent();
+Pair<String, Object> location = Pair.of("names[]", "specialDiscount");
+Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
+assertThat(result).isPresent();
  ```
 
 ### Get object by nested object value in list
  ```java 
-      Pair<String, Object> location = Pair.of("properties[id]", "d9c40d29-e828-4c15-9519-29891496ec8e");
-      Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
-      assertThat(result).isPresent();
+Pair<String, Object> location = Pair.of("properties[id]", "d9c40d29-e828-4c15-9519-29891496ec8e");
+Optional<CalculationPart> result = FindObjectUtils.find(baseObject, location, CalculationPart.class);
+assertThat(result).isPresent();
  ```
 
 ### Get all objects by nested object value
 
 ```java
-      Pair<String, Object> location = Pair.of("information/key", "SPECIAL_DISCOUNT");
-      List<CalculationPart> result = FindObjectUtils.findAll(baseObject, location, CalculationPart.class);
-      assertThat(result).hasSize(2);
+Pair<String, Object> location = Pair.of("information/key", "SPECIAL_DISCOUNT");
+List<CalculationPart> result = FindObjectUtils.findAll(baseObject, location, CalculationPart.class);
+assertThat(result).hasSize(2);
 ```
+
+### More examples
+A more detailed example use-case can be found [here](./exampleUseCase.md). All displayed code examples can be found in [DocExamplesTest](./src/test/java/io/github/mrtimeey/objectfinder/core/DocExamplesTest.java). 
 
 ## <a name="quickstart"/>Quickstart</a>
 
